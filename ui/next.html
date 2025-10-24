@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>next</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #130808;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Screen container */
+    .screen {
+      width: 440px;
+      height: 956px;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      position: relative;
+      background-color: #fff;
+    }
+
+    /* Background image */
+    .food-bg {
+      background-image: url('praise.jpeg'); /* Replace with your uploaded image */
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Bottom content */
+    .content {
+      background-color: #fff;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 30%;
+      border-top-left-radius: 36px;
+      border-top-right-radius: 36px;
+      text-align: center;
+      padding: 40px 20px;
+      box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Dots indicator */
+    .indicator {
+      margin-bottom: 15px;
+    }
+
+    .dot {
+      display: inline-block;
+      height: 10px;
+      width: 10px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background-color: #ffd4b8;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      width: 25px;
+      background-color: #ff6a00;
+      border-radius: 20px;
+    }
+
+    /* Texts */
+    h2 {
+      font-size: 24px;
+      color: #222;
+      width:408;
+      height:32px;
+      font:poppins;
+      font-style:SemiBold;
+      font-weight:600;
+      line-height:133%;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 14px;
+      color: #666;
+      width:403px;
+      height:38px;
+      font:poppins;
+      font-weight:400;
+      line-height:138%;
+      letter-spacing:opx;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    /* Get Started Button */
+    .get-started-btn {
+      background-color: #ff6a00;
+      border: none;
+      width: 334px;
+      height: 52px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 48px;
+      cursor: pointer;
+      padding-top:16px;
+      padding-right:80px;
+      padding-bottom:16px;
+      padding-left:80px;
+      gap:8px;
+    }
+
+    .get-started-btn:hover {
+      background-color: #e65c00;
+    }
+
+    /* Back arrow button */
+    .back-btn {
+      background-color: #FFCDB6;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: #ff6a00;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s ease;
+    }
+
+    /* Button container */
+    .btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="screen">
+    <!-- Background Image -->
+    <div class="food-bg"></div>
+
+    <!-- Bottom Card -->
+    <div class="content">
+      <div class="indicator">
+        <span class="dot"></span>
+        <span class="dot active"></span>
+      </div>
+
+      <h2>Swipe. Watch. Crave.</h2>
+      <p>Explore mouth-watering short videos of dishes. One swipe and you’re ready to order your next bite.</p>
+
+      <div class="btn-container">
+        <button class="back-btn"  onclick="window.location.href='index.html'">&lt;</button>
+        <button class="get-started-btn" onclick="window.location.href='home.html'">Get Started</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

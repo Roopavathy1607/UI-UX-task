@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Screen</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #130808;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Mobile screen frame */
+    .screen {
+      width: 440px;
+      height: 956px;
+      overflow: hidden;
+      position: relative;
+      background-color: #f35b04; /* Orange background */
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Loader dots container */
+    .loader {
+      width:88px;
+      height:48px;
+      position: absolute;
+      bottom: 120px; /* Position dots near bottom */
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+    }
+
+    /* White dots */
+    .dot {
+      width: 14px;
+      height: 14px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      animation: bounce 1.2s infinite ease-in-out;
+    }
+
+    /* Animation delay for each dot */
+    .dot:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    /* Bounce animation */
+    @keyframes bounce {
+      0%, 80%, 100% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0.6;
+      }
+      40% {
+        transform: translateY(-10px) scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="screen" onclick="window.location.href='home.html'">
+    <!-- Orange loading screen -->
+    <div class="loader" >
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+</body>
+</html>

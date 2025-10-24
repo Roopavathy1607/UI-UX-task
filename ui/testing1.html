@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>testing1</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #130808;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Mobile screen frame */
+    .screen {
+      width: 440px;
+      height: 956px;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      background-color: #fff;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Top background */
+    .top-bg {
+      background-color: #ff6a00;
+      background-image: url('testing1.png'); /* Replace with your image */
+      background-size: cover;
+      height: 600px;
+      width:440px;
+      position: relative;
+    }
+
+    /* Logo text */
+    .logo {
+      position: absolute;
+      top: 160px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #fff;
+    }
+
+    .logo h1 {
+      font-size: 48px;
+      font-weight: 700;
+    }
+
+    .logo span {
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    /* Bottom content card */
+    .content {
+        width:440px;
+        height:400px;
+        background-color: #fff;
+        position: absolute;
+        bottom: 0;
+        border-top-left-radius: 28px;
+        border-top-right-radius:28px;
+        padding: 40px 28px;
+        box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
+     }
+
+    /* Title */
+    .content h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Input box */
+    .phone-input {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .flag {
+      width: 28px;
+      height: 18px;
+      background-image: url('https://flagcdn.com/w20/us.png');
+      background-size: cover;
+      border-radius: 4px;
+    }
+
+    .code {
+      font-size: 16px;
+      color: #333;
+    }
+
+    input {
+      border: none;
+      outline: none;
+      font-size: 16px;
+      flex: 1;
+      color: #444;
+    }
+
+    /* Continue button */
+    .continue-btn {
+      width: 100%;
+      background-color: #ddd;
+      color: #888;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px;
+      border: none;
+      border-radius: 32px;
+      margin-bottom: 24px;
+      cursor: pointer;
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px dashed #ddd;
+    }
+
+    .divider:not(:empty)::before {
+      margin-right: .75em;
+    }
+
+    .divider:not(:empty)::after {
+      margin-left: .75em;
+    }
+
+    /* Social icons */
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 24px;
+    }
+
+    .socials img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    /* Policy text */
+    .policy {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="screen">
+    <!-- Orange background section -->
+    <div class="top-bg">
+      <div class="logo">
+        <h1>O<span style="font-weight:400;">ne</span> <br> Bite</h1>
+      </div>
+    </div>
+
+    <!-- Bottom white content -->
+    <div class="content">
+      <h3>Enter Your Mobile Number</h3>
+
+      <div class="phone-input">
+        <div class="flag"></div>
+        <span class="code">+1</span>
+        <input type="text" placeholder="Mobile Number">
+      </div>
+
+      <button class="continue-btn">Continue</button>
+
+      <div class="divider">OR</div>
+
+      <div class="socials">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Google_2015_logo.svg" alt="Google">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email">
+      </div>
+
+      <p class="policy">
+        By continuing, you agree to our Terms of Service<br>
+        Privacy Policy and Content Policy
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

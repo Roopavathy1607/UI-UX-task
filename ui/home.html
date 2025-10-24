@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Food App - Mobile Mock</title>
+
+  <!-- Optional: load a clean font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f8f8f8;
+      --card: #ffffff;
+      --accent: #ff6a00;
+      --muted: #9b9b9b;
+      --radius: 14px;
+      --screen-w: 390px; /* mobile width */
+    }
+
+    /* Page / center container */
+    html,body{
+      height:100%;
+      margin:0;
+      background: linear-gradient(180deg,#0d0c0c 0%, #060606 100%);
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .device {
+      width: var(--screen-w);
+      height: 844px; /* typical phone viewport height for preview */
+      margin: 18px auto;
+      border-radius: 28px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.12);
+      overflow: hidden;
+      position: relative;
+      background: var(--bg);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    /* App safe area (we fix header & footer and let main scroll) */
+    .app {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg,#fff 0%, #fff 100%);
+    }
+
+    /* Fixed header */
+    header.app-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 110px;
+      padding: 12px 16px;
+      background: white;
+      z-index: 30;
+      box-shadow: 0 6px 18px rgba(20,20,20,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Top row: location and bell */
+    .top-row {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 8px;
+    }
+    .location {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:14px;
+      color:#222;
+      font-weight:600;
+    }
+    .location small { display:block; font-weight:400; font-size:12px; color:var(--muted); }
+
+    .icon-circle {
+      width:38px; height:38px;
+      background:#f6f6f6;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:18px;
+      color:var(--accent);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    }
+
+    /* Search row */
+    .search-row {
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .search {
+      flex:1;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#f2f2f2;
+      padding:10px 12px;
+      border-radius:12px;
+      font-size:13px;
+      color:#333;
+    }
+    .filter-btn {
+      background:#ff6a00;
+      color:white;
+      padding:8px 10px;
+      border-radius:10px;
+      font-weight:600;
+      font-size:13px;
+      min-width:56px;
+      text-align:center;
+    }
+
+    /* Main scrollable content sits under header and above footer */
+    main.content {
+      position: absolute;
+      top: 110px; /* header height */
+      bottom: 84px; /* footer height */
+      left: 0;
+      right: 0;
+      padding: 12px 12px 24px 12px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 30%);
+    }
+
+    /* categories row (horizontal scroll) */
+    .categories {
+      display:flex;
+      gap:12px;
+      overflow-x:auto;
+      padding: 8px 4px;
+      margin-bottom:14px;
+    }
+    .cat {
+      min-width:72px;
+      height:86px;
+      background:#fff;
+      border-radius:14px;
+      box-shadow: 0 6px 18px rgba(8,8,8,0.04);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:8px;
+      text-align:center;
+      font-size:12px;
+    }
+    .cat img { width:36px; height:36px; object-fit:cover; }
+
+    /* Section title */
+    .section {
+      margin: 8px 4px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .section h3 { font-size:16px; margin:0; color:#222; font-weight:700; }
+    .section .see-more { font-size:13px; color:var(--muted); }
+
+    /* Card horizontal scroller */
+    .h-scroll {
+      display:flex;
+      gap:12px;
+      overflow-x:auto;
+      padding-bottom:8px;
+    }
+
+    .card {
+      min-width:300px;
+      background:var(--card);
+      border-radius:16px;
+      box-shadow: 0 12px 30px rgba(20,20,20,0.06);
+      overflow: hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .card .thumb {
+      height:140px;
+      background-size:cover;
+      background-position:center;
+    }
+    .card .meta {
+      padding:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .meta-left { flex:1; }
+    .meta-left h4 { margin:0 0 6px 0; font-size:15px; }
+    .meta-left .sub { font-size:12px; color:var(--muted); }
+
+    .fav {
+      width:36px; height:36px;
+      border-radius:10px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      color:var(--accent);
+      font-weight:700;
+    }
+
+    /* Repeating list (vertical) */
+    .list {
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .list-item {
+      background:var(--card);
+      border-radius:14px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:10px;
+      box-shadow: 0 10px 24px rgba(10,10,10,0.04);
+    }
+    .list-item .thumb-small {
+      width:92px;
+      height:68px;
+      border-radius:10px;
+      background-size:cover;
+      background-position:center;
+      flex-shrink:0;
+    }
+    .list-item .info { flex:1; }
+    .list-item h4 { margin:0 0 4px 0; font-size:15px; }
+    .list-item p { margin:0; font-size:12px; color:var(--muted); }
+
+    /* Top 10 grid like small badges */
+    .grid-small {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .grid-small .small-card {
+      width:150px;
+      height:80px;
+      background:linear-gradient(180deg,#fff,#fff);
+      border-radius:10px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+      display:flex;
+      align-items:center;
+      padding:8px;
+      gap:8px;
+    }
+    .small-card img { width:56px; height:56px; object-fit:cover; border-radius:8px; }
+
+    /* Footer nav fixed */
+    footer.app-footer {
+      position: absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:84px;
+      background:white;
+      border-top-left-radius:18px;
+      border-top-right-radius:18px;
+      box-shadow: 0 -6px 18px rgba(0,0,0,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:space-around;
+      padding:10px 12px;
+      z-index:40;
+    }
+    .nav-item {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .nav-item.active { color: var(--accent); font-weight:700; }
+
+    /* small visual tweaks for scrollbars */
+    .categories::-webkit-scrollbar,
+    .h-scroll::-webkit-scrollbar { height:8px; }
+    .categories::-webkit-scrollbar-thumb,
+    .h-scroll::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.08); border-radius:8px; }
+
+    /* helper utility */
+    .muted { color:var(--muted); font-size:12px; }
+    .rating { color:#f6b23b; font-weight:700; font-size:13px; }
+  </style>
+</head>
+<body>
+  <div class="device" role="application" aria-label="Food app mock mobile">
+    <div class="app">
+
+      <!-- Header -->
+      <header class="app-header">
+        <div class="top-row">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="icon-circle">📍</div>
+            <div class="location">
+              <div>
+                1234 Main Street, Apt 3B
+                <small>San Francisco, CA 94105</small>
+              </div>
+            </div>
+          </div>
+          <div class="icon-circle" title="notifications">🔔</div>
+        </div>
+
+        <div class="search-row">
+          <div class="search" role="search">
+            🔎 <span style="opacity:.9;">Search for You Creaked Food</span>
+          </div><br>
+        </div>
+         <div class="filter-btn">Near By</div>
+      </header>
+
+      <!-- Scrollable content -->
+      <main class="content" aria-live="polite">
+
+        <!-- category icons -->
+        <div class="categories" aria-hidden="false">
+          <div class="cat"><img src="praise.jpeg" alt="breakfast"/><div>Breakfast</div></div>
+          <div class="cat"><img src="praise.jpeg" alt="coffee"/><div>Coffee</div></div>
+          <div class="cat"><img src="praise.jpeg" alt="burger"/><div>Burger</div></div>
+          <div class="cat"><img src="praise.jpeg" alt="bakery"/><div>Bakery</div></div>
+          <div class="cat"><img src="praise.jpeg" alt="pizza"/><div>Pizza</div></div>
+        </div>
+
+        <!-- "Best For Your Rainy Day" horizontal cards -->
+        <div class="section">
+          <h3>Best For Your Rainy Day</h3>
+          <div class="see-more">›</div>
+        </div>
+
+        <div class="h-scroll" aria-label="featured restaurants">
+          <article class="card" style="min-width:300px;">
+            <div class="thumb" style="background-image:url('praise.jpeg');"></div>
+            <div class="meta">
+              <div class="meta-left">
+                <h4>McDonald's</h4>
+                <div class="sub"><span class="rating">4.6</span> • 0.5 mi • 10 mins<br>3700 S Paradise Rd</div>
+              </div>
+              <div class="fav">♡</div>
+            </div>
+          </article>
+
+          <article class="card" style="min-width:300px;">
+            <div class="thumb" style="background-image:url('praise.jpeg');"></div>
+            <div class="meta">
+              <div class="meta-left">
+                <h4>Pizza Place</h4>
+                <div class="sub"><span class="rating">4.6</span> • 0.6 mi • 12 mins<br>512 Main Ave</div>
+              </div>
+              <div class="fav">♡</div>
+            </div>
+          </article>
+        </div>
+
+        <!-- "This can Feed Your Mood" -->
+        <div class="section" style="margin-top:16px;">
+          <h3>This can Feed Your Mood</h3>
+          <div class="see-more">›</div>
+        </div>
+
+        <div class="h-scroll">
+          <article class="card" style="min-width:300px;">
+            <div class="thumb" style="background-image:url('praise.jpeg');"></div>
+            <div class="meta">
+              <div class="meta-left">
+                <h4>Kabob Korner</h4>
+                <div class="sub"><span class="rating">3.4</span> • 1.9 mi • 25 mins<br>4560 S Wall street Rd</div>
+              </div>
+              <div class="fav">♡</div>
+            </div>
+          </article>
+          <article class="card" style="min-width:300px;">
+            <div class="thumb" style="background-image:url('praise.jpeg');"></div>
+            <div class="meta">
+              <div class="meta-left">
+                <h4>Fried Chicken Co</h4>
+                <div class="sub"><span class="rating">4.1</span> • 1.2 mi • 20 mins<br>225 Market St</div>
+              </div>
+              <div class="fav">♡</div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Top 10 Fast Food Spots (small grid) -->
+        <div class="section" style="margin-top:18px;">
+          <h3>Top 10 Fast Food Spots</h3>
+          <div class="see-more">›</div>
+        </div>
+
+        <div class="grid-small">
+          <div class="small-card"><img src="praise.jpeg" alt=""><div style="font-size:13px;font-weight:700">Taco Bell</div></div>
+          <div class="small-card"><img src="praise.jpeg" alt=""><div style="font-size:13px;font-weight:700">Taco Bell</div></div>
+          <div class="small-card"><img src="praise.jpeg" alt=""><div style="font-size:13px;font-weight:700">Dunkin'</div></div>
+          <div class="small-card"><img src="praise.jpeg" alt=""><div style="font-size:13px;font-weight:700">Taco Bell</div></div>
+          <div class="small-card"><img src="praise.jpeg" alt=""><div style="font-size:13px;font-weight:700">Dunkin'</div></div>
+        </div>
+
+        <!-- All Other Stores list (vertical) -->
+        <div class="section" style="margin-top:18px;">
+          <h3>All Other Stores</h3>
+          <div class="see-more">›</div>
+        </div>
+
+        <div class="list" aria-label="restaurants list">
+          <!-- Repeat items -->
+          <div class="list-item">
+            <div class="thumb-small" style="background-image:url('praise.jpeg');"></div>
+            <div class="info">
+              <h4>Kabob Korner</h4>
+              <p class="muted">3.4 (5,000+) • 1.9 mi • 25 mins</p>
+              <p class="muted">4560 S Wall street Rd</p>
+            </div>
+            <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;">♡</div>
+          </div>
+
+          <div class="list-item">
+            <div class="thumb-small" style="background-image:url('praise.jpeg');"></div>
+            <div class="info">
+              <h4>Kabob Korner</h4>
+              <p class="muted">3.4 (5,000+) • 1.9 mi • 25 mins</p>
+              <p class="muted">4560 S Wall street Rd</p>
+            </div>
+            <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;">♡</div>
+          </div>
+
+          <div class="list-item">
+            <div class="thumb-small" style="background-image:url('praise.jpeg');"></div>
+            <div class="info">
+              <h4>Kabob Korner</h4>
+              <p class="muted">3.4 (5,000+) • 1.9 mi • 25 mins</p>
+              <p class="muted">4560 S Wall street Rd</p>
+            </div>
+            <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;">♡</div>
+          </div>
+
+          <div class="list-item">
+            <div class="thumb-small" style="background-image:url('praise.jpeg');"></div>
+            <div class="info">
+              <h4>Kabob Korner</h4>
+              <p class="muted">3.4 (5,000+) • 1.9 mi • 25 mins</p>
+              <p class="muted">4560 S Wall street Rd</p>
+            </div>
+            <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;">♡</div>
+          </div>
+        </div>
+
+        <!-- bottom spacer so last item isn't hidden behind footer -->
+        <div style="height: 18px;"></div>
+      </main>
+
+      <!-- Footer nav fixed -->
+      <footer class="app-footer" role="navigation" aria-label="bottom navigation">
+        <div class="nav-item active">
+          <div>🏠</div>
+          <div>Home</div>
+        </div>
+        <div class="nav-item">
+          <div>🗺️</div>
+          <div>Map</div>
+        </div>
+        <div class="nav-item">
+          <div>🍔</div>
+          <div>Bites</div>
+        </div>
+        <div class="nav-item">
+          <div>🧺</div>
+          <div>Basket</div>
+        </div>
+        <div class="nav-item">
+          <div>👤</div>
+          <div>Profile</div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+</body>
+</html>
